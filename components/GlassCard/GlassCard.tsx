@@ -1,7 +1,9 @@
+// components/GlassCard/GlassCard.tsx
+"use client";
 import React, { useState, FC } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
-
+import styles from './GlassCard.module.css';
 
 interface GlassCardProps {
   image: string;
@@ -44,11 +46,11 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, description }) => {
       tiltMaxAngleY={15}
       glareEnable={true}
       glareMaxOpacity={0.2}
-      glareColor="#ffffff"
+      glareColor="#9c27b0"
       glarePosition="all"
     >
       <motion.div
-        className="glass-card-container"
+        className={styles.glassCardContainer}
         onPointerMove={handleMove}
         onHoverStart={() => setIsFlipped(true)}
         onHoverEnd={() => setIsFlipped(false)}
@@ -56,22 +58,22 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, description }) => {
       >
         <AnimatePresence initial={false}>
           <motion.div
-            className="glass-card"
+            className={styles.glassCard}
             initial={false}
             animate={{ rotateY: isFlipped ? 180 : 0 }}
             transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
             style={{ transformStyle: 'preserve-3d' as const }}
           >
             {/* Front Side */}
-            <div className="card-front">
-              <div className="card-image-container">
-                <img src={image} alt={title} className="card-image" />
+            <div className={styles.cardFront}>
+              <div className={styles.cardImageContainer}>
+                <img src={image} alt={title} className={styles.cardImage} />
               </div>
-              <h3 className="card-title">{title}</h3>
+              <h3 className={styles.cardTitle}>{title}</h3>
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="explore-btn"
+                className={styles.exploreBtn}
                 role="button"
               >
                 Explore
@@ -79,11 +81,11 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, description }) => {
             </div>
 
             {/* Back Side */}
-            <div className="card-back">
-              <p className="card-description">{description}</p>
-              <div className="stats-container">
+            <div className={styles.cardBack}>
+              <p className={styles.cardDescription}>{description}</p>
+              <div className={styles.statsContainer}>
                 {stats.map((stat, index) => (
-                  <div key={index} className="stat-item">
+                  <div key={index} className={styles.statItem}>
                     <span>{stat.value}</span>
                     <p>{stat.label}</p>
                   </div>
