@@ -3,20 +3,22 @@
 import React, { useState, FC } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
+import { FiLinkedin, FiGithub, FiMail } from 'react-icons/fi';
 import styles from './GlassCard.module.css';
 
 interface GlassCardProps {
   image: string;
   title: string;
-  description: string;
+  position: string;
+  contact: string;
+  socials: {
+    linkedin?: string;
+    github?: string;
+    email?: string;
+  };
 }
 
-interface StatItem {
-  value: string;
-  label: string;
-}
-
-const GlassCard: FC<GlassCardProps> = ({ image, title, description }) => {
+const GlassCard: FC<GlassCardProps> = ({ image, title, position, contact, socials }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
@@ -26,19 +28,11 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, description }) => {
 
   const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const x = (e.clientX - rect.left) / width - 0.5;
-    const y = (e.clientY - rect.top) / height - 0.5;
-    
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
     rotateX.set(y * 10);
     rotateY.set(x * 10);
   };
-
-  const stats: StatItem[] = [
-    { value: '98%', label: 'Engagement' },
-    { value: '24h', label: 'Delivery' }
-  ];
 
   return (
     <Tilt
@@ -64,32 +58,56 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, description }) => {
             transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
             style={{ transformStyle: 'preserve-3d' as const }}
           >
-            {/* Front Side */}
+            {/* Front Side - Avatar */}
             <div className={styles.cardFront}>
-              <div className={styles.cardImageContainer}>
-                <img src={image} alt={title} className={styles.cardImage} />
+              <div className={styles.avatarContainer}>
+                <img src={image} alt={title} className={styles.avatarImage} />
               </div>
               <h3 className={styles.cardTitle}>{title}</h3>
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={styles.exploreBtn}
-                role="button"
-              >
-                Explore
-              </motion.button>
+              <p className={styles.cardPosition}>{position}</p>
             </div>
 
-            {/* Back Side */}
+            {/* Back Side - Details */}
             <div className={styles.cardBack}>
-              <p className={styles.cardDescription}>{description}</p>
-              <div className={styles.statsContainer}>
-                {stats.map((stat, index) => (
-                  <div key={index} className={styles.statItem}>
-                    <span>{stat.value}</span>
-                    <p>{stat.label}</p>
-                  </div>
-                ))}
+              <div className={styles.detailsContainer}>
+                <h4 className={styles.detailTitle}>Contact Details</h4>
+                <div className={styles.detailItem}>
+                  <FiMail className={styles.detailIcon} />
+                  <a href={`mailto:${contact}`} className={styles.detailLink}>
+                    {contact}
+                  </a>
+                </div>
+                
+                <div className={styles.socialContainer}>
+                  {socials.linkedin && (
+                    <motion.a
+                      whileHover={{ scale: 1.1 }}
+                      href={socials.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FiLinkedin className={styles.socialIcon} />
+                    </motion.a>
+                  )}
+                  {socials.github && (
+                    <motion.a
+                      whileHover={{ scale: 1.1 }}
+                      href={socials.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FiGithub className={styles.socialIcon} />
+                    </motion.a>
+                  )}
+                  {socials.email && (
+                    <motion.a
+                      whileHover={{ scale: 1.1 }}
+                      href={`mailto:${socials.email}`}
+                    >
+                      <FiMail className={styles.socialIcon} />
+                    </motion.a>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>

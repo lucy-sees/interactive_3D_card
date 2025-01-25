@@ -1,4 +1,5 @@
 // components/Header/Header.tsx
+"use client";
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 import styles from './Header.module.css';
