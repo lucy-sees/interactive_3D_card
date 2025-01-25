@@ -95,4 +95,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 **Made with ❤️ by Lucy**  
 ⭐ Star this repo if you found it useful!  
-🐞 Found an issue? [Report it here](https://github.com/yourusername/interactive-3d-cards/issues)
+🐞 Found an issue? [Report it here](https://github.com/lucy-sees/interactive-3d-cards/issues)
