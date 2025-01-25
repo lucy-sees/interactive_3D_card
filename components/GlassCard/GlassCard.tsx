@@ -1,24 +1,39 @@
 // components/GlassCard/GlassCard.tsx
+// components/GlassCard/GlassCard.tsx
 "use client";
-import React, { useState, FC } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
-import Tilt from 'react-parallax-tilt';
-import { FiLinkedin, FiGithub, FiMail } from 'react-icons/fi';
-import styles from './GlassCard.module.css';
+import React, { useState, FC } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import Tilt from "react-parallax-tilt";
+import { FiLinkedin, FiGithub, FiMail, FiGlobe } from "react-icons/fi";
+import styles from "./GlassCard.module.css";
 
 interface GlassCardProps {
   image: string;
   title: string;
   position: string;
   contact: string;
-  socials: {
+  expertise: string[];
+  socials?: {
     linkedin?: string;
     github?: string;
+    website?: string;
     email?: string;
   };
 }
 
-const GlassCard: FC<GlassCardProps> = ({ image, title, position, contact, socials }) => {
+const GlassCard: FC<GlassCardProps> = ({
+  image,
+  title,
+  position,
+  contact,
+  expertise,
+  socials = {},
+}) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
@@ -56,7 +71,7 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, position, contact, social
             initial={false}
             animate={{ rotateY: isFlipped ? 180 : 0 }}
             transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
-            style={{ transformStyle: 'preserve-3d' as const }}
+            style={{ transformStyle: "preserve-3d" as const }}
           >
             {/* Front Side - Avatar */}
             <div className={styles.cardFront}>
@@ -67,19 +82,31 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, position, contact, social
               <p className={styles.cardPosition}>{position}</p>
             </div>
 
-            {/* Back Side - Details */}
+            {/* Back Side - Professional Details */}
             <div className={styles.cardBack}>
               <div className={styles.detailsContainer}>
-                <h4 className={styles.detailTitle}>Contact Details</h4>
-                <div className={styles.detailItem}>
+                <h4 className={styles.detailTitle}>Professional Details</h4>
+
+                <div className={styles.detailSection}>
                   <FiMail className={styles.detailIcon} />
                   <a href={`mailto:${contact}`} className={styles.detailLink}>
                     {contact}
                   </a>
                 </div>
-                
+
+                <div className={styles.detailSection}>
+                  <h5 className={styles.expertiseTitle}>Core Expertise</h5>
+                  <ul className={styles.expertiseList}>
+                    {expertise.map((skill, index) => (
+                      <li key={index} className={styles.expertiseItem}>
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 <div className={styles.socialContainer}>
-                  {socials.linkedin && (
+                  {socials?.linkedin && (
                     <motion.a
                       whileHover={{ scale: 1.1 }}
                       href={socials.linkedin}
@@ -89,7 +116,7 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, position, contact, social
                       <FiLinkedin className={styles.socialIcon} />
                     </motion.a>
                   )}
-                  {socials.github && (
+                  {socials?.github && (
                     <motion.a
                       whileHover={{ scale: 1.1 }}
                       href={socials.github}
@@ -99,12 +126,14 @@ const GlassCard: FC<GlassCardProps> = ({ image, title, position, contact, social
                       <FiGithub className={styles.socialIcon} />
                     </motion.a>
                   )}
-                  {socials.email && (
+                  {socials?.website && (
                     <motion.a
                       whileHover={{ scale: 1.1 }}
-                      href={`mailto:${socials.email}`}
+                      href={socials.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <FiMail className={styles.socialIcon} />
+                      <FiGlobe className={styles.socialIcon} />
                     </motion.a>
                   )}
                 </div>

@@ -15,10 +15,11 @@ const Home: FC = () => {
             title="Navneet K"
             position="Senior UX Designer"
             contact="navneet@company.com"
+            expertise={["Figma", "Adobe XD", "User Research", "Wireframing"]}
             socials={{
               linkedin: "#",
               github: "#",
-              email: "#"
+              email: "#",
             }}
           />
         </div>
@@ -28,12 +29,27 @@ const Home: FC = () => {
             title="Juma P"
             position="Lead Developer"
             contact="juma@company.com"
+            expertise={["Node.js", "GraphQL", "MongoDB", "Docker"]}
             socials={{
               linkedin: "#",
               github: "#",
-              email: "#"
+              email: "#",
             }}
           />
+        </div>
+        <div className="card-wrapper">
+        <GlassCard
+          image="/images/avatar_3.png"
+          title="Alice Chen"
+          position="Senior Frontend Developer"
+          contact="alice@techcorp.com"
+          expertise={["React", "TypeScript", "WebGL", "UX Optimization"]}
+          socials={{
+            linkedin: "#",
+            github: "#",
+            website: "#",
+          }}
+        />
         </div>
       </div>
     </div>
