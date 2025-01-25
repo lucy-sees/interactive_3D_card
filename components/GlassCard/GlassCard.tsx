@@ -1,5 +1,4 @@
 // components/GlassCard/GlassCard.tsx
-// components/GlassCard/GlassCard.tsx
 "use client";
 import React, { useState, FC } from "react";
 import {
@@ -18,11 +17,11 @@ interface GlassCardProps {
   position: string;
   contact: string;
   expertise: string[];
-  socials?: {
+  socials: {
     linkedin?: string;
     github?: string;
-    website?: string;
-    email?: string;
+    mail?: string;
+    globe?: string;
   };
 }
 
@@ -61,17 +60,16 @@ const GlassCard: FC<GlassCardProps> = ({
       <motion.div
         className={styles.glassCardContainer}
         onPointerMove={handleMove}
-        onHoverStart={() => setIsFlipped(true)}
-        onHoverEnd={() => setIsFlipped(false)}
-        style={{ perspective: 1000, rotate: rotatedX, rotateY: rotatedY }}
+        onMouseEnter={() => setIsFlipped(true)}
+        onMouseLeave={() => setIsFlipped(false)}
+        style={{ rotateX: rotatedX, rotateY: rotatedY }}
       >
         <AnimatePresence initial={false}>
           <motion.div
-            className={styles.glassCard}
+            className= {`${styles.glassCard} ${isFlipped ? styles.isFlipped : ""}`}
             initial={false}
             animate={{ rotateY: isFlipped ? 180 : 0 }}
             transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
-            style={{ transformStyle: "preserve-3d" as const }}
           >
             {/* Front Side - Avatar */}
             <div className={styles.cardFront}>

@@ -19,12 +19,12 @@ const Header: FC = () => {
           <span className={styles.twinkle}>&#10022;</span>
         </motion.div>
 
-        <div className="flex space-x-8">
+        <div className="text-yellow-500 flex space-x-8">
           <motion.a
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
             href="#"
-            className={`${styles.astroLink} ${styles.neonYellow}`}
+            className={`${styles.astroLink} ${styles.neonYellow} hover:text-white`}
           >
             Components
           </motion.a>
@@ -32,7 +32,7 @@ const Header: FC = () => {
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
             href="#"
-            className={`${styles.astroLink} ${styles.neonPurple}`}
+            className={`${styles.astroLink} ${styles.neonPurple} hover:text-white`}
           >
             Showcase
           </motion.a>
@@ -40,7 +40,7 @@ const Header: FC = () => {
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.95 }}
             href="#"
-            className={`${styles.astroLink} ${styles.neonCyan}`}
+            className={`${styles.astroLink} ${styles.neonCyan} hover:text-white`}
           >
             Contact
           </motion.a>
