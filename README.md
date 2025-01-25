@@ -64,7 +64,7 @@ import GlassCard from '@/components/GlassCard';
 ## 🌐 Live Demo
 
 Check out the live demo hosted on Vercel:  
-🔗 [Link to live demo](https://your-demo-link.vercel.app)
+🔗 [Link to live demo](https://interactive-3-d-card.vercel.app/)
 
 ## 🎨 Customization
 
