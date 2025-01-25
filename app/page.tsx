@@ -40,7 +40,7 @@ const Home: FC = () => {
         <div className="card-wrapper">
         <GlassCard
           image="/images/avatar_3.png"
-          title="Alice Chen"
+          title="Alice C"
           position="Senior Frontend Developer"
           contact="alice@techcorp.com"
           expertise={["React", "TypeScript", "WebGL", "UX Optimization"]}
